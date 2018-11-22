@@ -4,19 +4,15 @@
   "version": "1.0",
   "manifest_version": 2,
   "icons": {
-		"16": "img/logo.png",
-		"48": "img/logo.png",
-		"128": "img/logo.png"
+		"16": "src/img/logo.png",
+		"48": "src/img/logo.png",
+		"128": "src/img/logo.png"
 	},
   "browser_action": {
-    "default_popup": "html/popup.html",
-    "default_icon": "img/logo.png",
+    "default_popup": "src/popup/index.html",
+    "default_icon": "src/img/logo.png",
     "default_title": "这是一个Chrome测试插件"
   },
-  // "chrome_url_overrides":
-	// {
-	// 	"newtab": "html/newPage.html"
-  // },
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
