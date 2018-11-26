@@ -3,7 +3,8 @@ const commonConfig = require('./webpack.common')
 
 const devConfig = merge(commonConfig, {
   mode: 'development',
-  watch: true
+  watch: true,
+  devtool:'source-map'
 })
 
 module.exports = devConfig
