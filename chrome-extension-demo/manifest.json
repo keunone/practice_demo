@@ -1,5 +1,5 @@
 {
-  "name": "扩展demo",
+  "name": "扩展",
   "description" : "这是 Zoey's chrome扩展程序demo",
   "version": "1.0",
   "manifest_version": 2,
@@ -7,19 +7,19 @@
 		"16": "src/img/logo.png",
 		"48": "src/img/logo.png",
 		"128": "src/img/logo.png"
-	},
-  "browser_action": {
-    "default_popup": "src/popup/index.html",
-    "default_icon": "src/img/logo.png",
-    "default_title": "这是一个Chrome测试插件"
-  },
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "mac": "MacCtrl+Shift+F"
-      },
-      "description": "Opens hello.html"
-    }
-  }
+	}
+  // "browser_action": {
+  //   "default_popup": "dist/popup/popup.html",
+  //   "default_icon": "src/img/logo.png",
+  //   "default_title": "这是一个Chrome测试插件"
+  // },
+  // "commands": {
+  //   "_execute_browser_action": {
+  //     "suggested_key": {
+  //       "default": "Ctrl+Shift+F",
+  //       "mac": "MacCtrl+Shift+F"
+  //     },
+  //     "description": "Opens hello description"
+  //   }
+  // }
 }
