@@ -4,8 +4,6 @@ export const databaseProviders = [
   {
     provide: 'MongoDBConnection',
     useFactory: async (): Promise<mongoose.Connection> =>
-      await mongoose.connect('mongodb://localhost/captureWord', {
-        useMongoClient: true,
-    }),
+      await mongoose.connect('mongodb://localhost/captureWord'),
   },
 ];

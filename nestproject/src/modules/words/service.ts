@@ -1,17 +1,17 @@
 import { Model } from 'mongoose';
-import { Component, Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Word } from './interfaces/words.interface';
 import { CreateWordDto } from './dto/words.dto';
 // @Injectable()
-@Component()
+@Injectable()
 export class WordsService {
-    // 注入的CatModelToken要与cats.providers.ts里面的key一致就可以
-    constructor( @Inject('CatModelToken') private readonly wordModel: Model<Word>) { }
+    // 注入的WordModelToken要与providers.ts里面的key一致就可以
+    constructor( @Inject('WordModelToken') private readonly wordModel: Model<Word>) { }
 
     // 创建数据
     async create(createCatDto: CreateWordDto): Promise<Word> {
-        const createdCat = new this.wordModel(createCatDto);
-        return await createdCat.save();
+        const createdWord = new this.wordModel(createCatDto);
+        return await createdWord.save();
     }
 
     // 查询全部数据

@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
-import { GetWordsController } from './controller';
+import { WordsController } from './controller';
 import { WordsService } from './service';
+import { WordsProviders } from './providers';
+
+import { DatabaseModule } from '../../../src/database/database.module';
 
 @Module({
-    controllers: [GetWordsController],
-    providers: [WordsService],
+    imports: [DatabaseModule],
+    controllers: [WordsController],
+    providers: [WordsService, ...WordsProviders],
 })
 
-export class GetWordsModule {}
+export class WordsModule {}
