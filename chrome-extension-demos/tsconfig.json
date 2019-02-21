@@ -1,0 +1,61 @@
+// http: //www.nbsite.cn/qdjs/31
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "outDir": "dist",
+    "allowUnusedLabels": true,
+    "noImplicitReturns": false,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "lib": [
+      "es7",
+      "dom"
+    ],
+    "pretty": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "assets/*": [
+        "assets/*"
+      ],
+      "styles/*": [
+        "src/styles/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "chrome/*": [
+        "src/chrome/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "containers/*": [
+        "src/containers/*"
+      ],
+      "config/*": [
+        "config/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "service/*": [
+        "src/service/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false
+}
