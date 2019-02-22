@@ -1,0 +1,47 @@
+{
+  "description": "chrome智能文档助手",
+  "name": "demo",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "author": "ZoeyZhou",
+  // "homepage_url": "",
+  "content_security_policy": "font-src 'self' https://fonts.googleapis.com; script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "128": "logo.png",
+    "16": "logo.png",
+    "48": "logo.png"
+  },
+  "web_accessible_resources": [
+    "logo.png",
+    "assets/*"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "clipboardWrite",
+    "clipboardRead",
+    "activeTab",
+    "webRequest",
+    "storage",
+    "tabs",
+    "cookies",
+    "notifications",
+    "alarms",
+    "webRequestBlocking"
+  ],
+  "browser_action": {
+    "default_title": "Chrome插件demo",
+    "default_icon": "logo.png",
+    "default_popup": "popup/popup.html" // 不需要
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  }
+}
