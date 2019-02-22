@@ -1,16 +1,6 @@
-import React, { Component } from 'react'
+
+import * as React from 'react'
 import { render } from 'react-dom'
+import Options from 'pages/options'
 
-render(
-  <div></div>,
-  document.getElementById('app')
-)
-
-// 动态刷新词汇表
-/* eslint-disable no-undef */
-// chrome.runtime.onMessage.addListener(async (request, sender, sendRes) => {
-//   const { name: type } = request
-//   if (type === 'vocabularyChange') {
-//     return true
-//   }
-// })
+render(<Options />, document.getElementById('app'))

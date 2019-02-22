@@ -8,6 +8,7 @@ const tsImportPluginFactory = require('ts-import-plugin')
 const autoprefixer = require('autoprefixer');
 
 const extractPopupCSS = new ExtractTextPlugin('../dist/styles/popup.css')
+// const extractOptionsCSS = new ExtractTextPlugin('../dist/styles/options.css')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir) // root dir
@@ -53,6 +54,19 @@ const rules = [
       ]
     })
   },
+  // {
+  //   test: /options\.less$/,
+  //   use: extractOptionsCSS.extract({
+  //     use: ['css-loader',
+  //       {
+  //         loader: 'less-loader',
+  //         options: {
+  //           javascriptEnabled: true,
+  //         }
+  //       }
+  //     ]
+  //   })
+  // },
   // {
   //   test: /tools\.less$/,
   //   use: extractToolsCSS.extract({
@@ -157,6 +171,7 @@ module.exports = {
   plugins: [
     ...WEBPACK_PLUGINS,
     extractPopupCSS,
+    // extractOptionsCSS,
     // extractToolsCSS,
     // new webpack.optimize.splitChunks({
     //   name: true,
