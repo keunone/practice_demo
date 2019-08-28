@@ -67,3 +67,4 @@ typings/**
 .vscode/**
 .awcache/**
 dist/**
+package-lock.json
