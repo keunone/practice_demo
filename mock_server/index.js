@@ -13,6 +13,105 @@ var server = restify.createServer();
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
+// 话题筛选器
+server.get('/api/txtanls/topic/mentions/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    hastopicgroup: true,
+    data: [
+      {
+        "total_num": 11,
+        "topicgrname": "生煎组",
+        "topicgrid": "5d4be7d8352a7a553cb71545",
+        "topiclist": [
+          {
+              "topicname": "生煎",
+              "mentionnum": 9,
+              "topicid": "49e2348"
+          },
+          {
+              "topicname": "生煎2",
+              "mentionnum": 2,
+              "topicid": "5d4be9f5352d5f7"
+          },
+          {
+              "topicname": "生煎3",
+              "mentionnum": 2,
+              "topicid": "5d47a5b242797ad"
+          }
+        ]
+      },
+      {
+        "total_num": 13,
+        "topicgrname": "饺子组",
+        "topicgrid": "5d4be7553cb71546",
+        "topiclist": [
+          {
+              "topicname": "饺子1",
+              "mentionnum": 9,
+              "topicid": " a7a7a949e2348"
+          },
+          {
+              "topicname": "饺子2",
+              "mentionnum": 2,
+              "topicid": " 78c00d5f7"
+          },
+          {
+              "topicname": "饺子3",
+              "mentionnum": 2,
+              "topicid": " 242797ad"
+          }
+        ]
+      },
+      {
+        "total_num": 13,
+        "topicgrname": "包子组",
+        "topicgrid": "5d4be7547",
+        "topiclist": [
+          {
+              "topicname": "包子1",
+              "mentionnum": 9,
+              "topicid": "5d4be9d6352a "
+          },
+          {
+              "topicname": "包子2",
+              "mentionnum": 2,
+              "topicid": "5d4be9f535 "
+          },
+          {
+              "topicname": "包子3",
+              "mentionnum": 2,
+              "topicid": "5d4bea14352a7a5b"
+          }
+        ]
+      },
+     {
+      "total_num": 13,
+      "topicgrname": "煎饼组",
+      "topicgrid": "5d4be548",
+      "topiclist": [
+        {
+            "topicname": "煎饼1",
+            "mentionnum": 9,
+            "topicid": "5d4be9d6 "
+        },
+        {
+            "topicname": "煎饼2",
+            "mentionnum": 2,
+            "topicid": "5d4b"
+        },
+        {
+            "topicname": "煎饼3",
+            "mentionnum": 2,
+            "topicid": "5d4be"
+        }
+      ]
+    }
+  ]
+  })
+})
+
 // 话题趋势图
 server.get('/api/txtanls/topic/ratio/trend/:id/', function(req, res, next) {
   respond(req, res, next, {
@@ -103,10 +202,10 @@ server.get('/api/txtanls/topicgr/ratio/trend/:id/', function(req, res, next) {
     code: 0,
     status_code: 200,
     data: [
-      {
-          "ratioval":"str", // 提及率值
-          "time":"str" // 周期变化对应的时间，坐标轴上的时间
-      },
+      // {
+      //     "ratioval":"str", // 提及率值
+      //     "time":"str" // 周期变化对应的时间，坐标轴上的时间
+      // },
       {
           "ratioval": "0.93",
           "time": "2019-02-05"
@@ -210,6 +309,114 @@ server.get('/api/txtanls/topicgrs/ratio/', function(req, res, next) {
   })
 })
 
+// 总体情感趋势接口
+server.get('/api/txtanls/records/emotiontrend/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    data: {
+      "list": [
+        {
+            "totalnum": 27,
+            "posnum": 15,
+            "neunum": 11,
+            "mixnum": 1,
+            "negnum": 0,
+            "time": "2019-03-06"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 12,
+            "mixnum": 0,
+            "negnum": 0,
+            "time": "2019-02-23"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 12,
+            "mixnum": 0,
+            "negnum": 0,
+            "time": "2019-02-15"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 15,
+            "mixnum": 32,
+            "negnum": 0,
+            "time": "2019-02-12"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 12,
+            "mixnum": 12,
+            "negnum": 21,
+            "time": "2019-02-11"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 25,
+            "mixnum": 32,
+            "negnum": 0,
+            "time": "2019-02-10"
+        },
+        {
+            "totalnum": 34,
+            "posnum": 52,
+            "neunum": 12,
+            "mixnum": 5,
+            "negnum": 4,
+            "time": "2019-02-09"
+        },
+        {
+            "totalnum": 23,
+            "posnum": 13,
+            "neunum": 14,
+            "mixnum": 4,
+            "negnum": 6,
+            "time": "2019-02-08"
+        },
+      ]  
+    }
+  })
+})
+
+// 总体情感细分接口
+server.get('/api/txtanls/records/emotions/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    data: {
+      "currentperiod": {
+        "totalnum": 9,
+        "posnum": 2, 
+        "neunum": 7,
+        "mixnum": 0,
+        "negnum": 0
+      },
+      "ringGrowth": {
+        "totalgrow": -2,
+        "posgrow": -6, 
+        "neugrow": 5,
+        "mixgrow": -1,
+        "neggrow": 0
+      },
+      "ringRatio": {
+        "totalratio": -0.18,
+        "posratio": -0.75,
+        "neuratio": 2.5,
+        "mixratio": "1",
+        "negratio": "-"
+      }
+    }
+  })
+})
+
+// 文本分析-分析项目
 server.get('/api/txtanls/projects/', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
