@@ -13,6 +13,86 @@ var server = restify.createServer();
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
+// 话题管理
+// 获取话题组信息
+server.get('/api/txtanls/topicgroups/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    data: [
+      {
+        "id": "5d4be7d8352a7a553cb71545", // 话题组id
+        "name": "未分组",  // 话题组名
+        "data": [
+            {
+                "name": "生煎", // 话题名
+                "num": 999,  // 话题关联的原话记录数量
+                "topic_id": "5d4be9d6352a7a7a949e2348"  // 话题id
+            },
+            {
+                "name": "生煎2",
+                "num": 1,
+                "topic_id": "5d4be9f5352a7a878c00d5f7"
+            },
+            {
+                "name": "生煎3",
+                "num": 0,
+                "topic_id": "5d4bea14352a7a5b242797ad"
+            }
+        ]
+      },
+      {
+        "id": "5d4be7d8352a7a553cb71547",
+        "name": "卫生",
+        "data": [
+            {
+                "name": "食材",
+                "num": 40,
+                "topic_id": "5d4bfbd2352a7a4460fcc145"
+            },
+            {
+                "name": "食材1",
+                "num": 40,
+                "topic_id": "5d4bfbd9352a7a721469078a"
+            },
+            {
+                "name": "食材2",
+                "num": 30,
+                "topic_id": "5d4bfbe2352a7a1284ecd3c6"
+            },
+            {
+                "name": "环境",
+                "num": 30,
+                "topic_id": "5d4bfc09352a7a3f7005925c"
+            },
+            {
+                "name": "环境1",
+                "num": 10,
+                "topic_id": "5d4bfc2b352a7a70fc0e381a"
+            },
+            {
+                "name": "环境2",
+                "num": 0,
+                "topic_id": "5d4bfc34352a7a71681b967a"
+            }
+        ]
+    }
+    ]
+  })
+})
+// 获取原话记录关联话题和没有关联的数量
+server.get('/api/txtanls/record/relation/info/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    hastopicgroup: true,
+    data: {
+      "associated": 1000, // 关联过话题的原话记录数量
+      "non_affiliated": 0 // 没有关联过话题的原话记录数量
+    }
+  })
+})
+
 // 话题筛选器
 server.get('/api/txtanls/topic/mentions/', function(req, res, next) {
   respond(req, res, next, {
