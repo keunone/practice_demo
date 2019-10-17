@@ -14,6 +14,38 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 // 话题管理
+
+// 重命名话题
+server.put('/api/txtanls/topics/update/:id/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    "data": "5d6a209f76aa2c000bbce17e"
+  }, 2000)
+})
+
+// 重命名话题组
+server.put('/api/txtanls/topicgroups/update/:id/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    "data": "5d68f99076aa2c00093c5c2f"
+  }, 2000)
+})
+
+// 删除话题
+server.del('/api/txtanls/topics/:topicgrid/', function(req, res, next) {
+  respond(req, res, next, {
+    "code": 0,
+    "data": 1
+  })
+})
+// 删除话题组
+server.del('/api/txtanls/topicgroups/delete/:topic_id/', function(req, res, next) {
+  respond(req, res, next, {
+    "code": 0,
+    "data": 1
+  })
+})
+
 // 获取话题组信息
 server.get('/api/txtanls/topicgroups/', function(req, res, next) {
   respond(req, res, next, {
