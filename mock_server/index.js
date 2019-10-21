@@ -15,6 +15,172 @@ server.use(restify.plugins.bodyParser());
 
 // 话题管理
 
+//  根据关键词函数获取原话记录
+server.get('/api/txtanls/record/search/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    data: [
+      {
+          "id": "5d4bdcd0352a7aa158a3b864", // 原话记录id
+          "content": "小杨生煎的生煎和各分店的都差不多吧.千张和油豆腐牛肉都好吃,适合早中晚3餐",
+          "datsrcId": "5d4bd8f743eaab3f24dc7650", // 数据源id
+          "anlsprojectID": "5d4bd92743eaab3f24dc7653",  // 项目id
+          "sentiscore": 5, // 得分
+          "senti": 0, // 情感倾向，0 正向，1 负向， 2 中性，3 混合
+          "recordtime": "2019-04-17 16:26:56",  // 原话记录时间
+          "createdDT": "2019-09-03 14:42:26",
+          "updatedDT": "2019-09-03 14:42:26",
+          "record_flag": 1,
+          "topic_msg": [
+              {
+                  "topicID": "5d4be9d6352a7a7a949e2348",  // 话题id
+                  "recordID": "5d4bdcd0352a7aa158a3b864",  // 原话记录id
+                  "score": -4,  // 该话题在原话记录上的得分
+                  "sentiment": 1,  // 该话题在原话记录上的情感倾向， 0 正向，1 负向， 2 中性，3 混合
+                  "name": "生煎",  // 话题名
+                  "logicexp": "生煎 or 粉丝",  // 话题的逻辑表达式
+                  "tgroupid":"5d4be7d8352a7a553cb71545"  // 所属话题组id
+              },
+               {
+                  "topicID": "5d4be9f5352a7a878c00d5f7",
+                  "recordID": "5d4bdcd0352a7aa158a3b864",
+                  "score": 4,
+                  "sentiment": 0,
+                  "name": "生煎2",
+                  "logicexp": "小杨生煎 or 阿三生煎",
+                  "tgroupid": "5d4be7d8352a7a553cb71545"
+              },
+              {
+                  "topicID": "5d4bea14352a7a5b242797ad",
+                  "recordID": "5d4bdcd0352a7aa158a3b864",
+                  "score": 2,
+                  "sentiment": 0,
+                  "name": "生煎3",
+                  "logicexp": "小杨生煎 and (not 阿三生煎)",
+                  "tgroupid": "5d4be7d8352a7a553cb71545"
+              }
+          ]
+      },
+      {
+          "id": "5d4bdcd0352a7aa158a3b888",
+          "content": "小杨生煎在上海算是最有名气了吧.生煎很好吃的!!!这家还算干净吧.店里也蛮大的.还有楼上.现在搬家了,就不大在这买了.........",
+          "datsrcId": "5d4bd8f743eaab3f24dc7650",
+          "anlsprojectID": "5d4bd92743eaab3f24dc7653",
+          "sentiscore": 1,
+          "recordID": "",
+          "senti": 0,
+          "recordtime": "2018-08-17 16:26:56",
+          "createdDT": "2019-09-03 14:42:26",
+          "updatedDT": "2019-09-03 14:42:26",
+          "record_flag": 1,
+          "topic_msg": [
+              {
+                  "topicID": "5d4be9d6352a7a7a949e2348",
+                  "recordID": "5d4bdcd0352a7aa158a3b888",
+                  "score": -1,
+                  "sentiment": 1,
+                  "name": "生煎",
+                  "logicexp": "生煎 or 粉丝", 
+                  "tgroupid":""  
+              },
+              {
+                  "topicID": "5d4be9f5352a7a878c00d5f7",
+                  "recordID": "5d4bdcd0352a7aa158a3b888",
+                  "score": -7,
+                  "sentiment": 1,
+                  "name": "生煎2",
+                  "logicexp": "生煎 or 粉丝", 
+                  "tgroupid":"" 
+              },
+              {
+                  "topicID": "5d4bea14352a7a5b242797ad",
+                  "recordID": "5d4bdcd0352a7aa158a3b888",
+                  "score": -3,
+                  "sentiment": 1,
+                  "name": "生煎3",
+                  "logicexp": "生煎 or 粉丝",
+                  "tgroupid":"" 
+              }
+          ]
+      }
+    ]
+  })
+})
+// 获取未屏蔽关键词的提及量、提及率
+server.get('/api/txtanls/keywords/activeinfo/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    data: [
+      {
+          "keyword": "生煎",
+          "relation_topic": true,
+          "nums": 653,
+          "ratio": 0.73
+      },
+      {
+          "keyword": "粉丝",  // 关键词信息
+          "relation_topic": false, // 是否关联话题
+          "nums": 136, // 提及量
+          "ratio": 0.15 // 提及率
+      },
+      {
+          "keyword": "鸡翅",
+          "relation_topic": true,
+          "nums": 1,
+          "ratio": 0.0
+      },
+      {
+          "keyword": "辣翅",
+          "relation_topic": true,
+          "nums": 4,
+          "ratio": 0.5
+      }
+    ]
+  })
+})
+// 获取屏蔽关键词的提及量、提及率
+server.get('/api/txtanls/keywords/inactiveinfo/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    status_code: 200,
+    data: [
+      {
+          "keyword": "生煎",
+          "relation_topic": true,
+          "nums": 653,
+          "ratio": 0.73
+      },
+      {
+          "keyword": "粉丝",
+          "relation_topic": false, // 是否关联话题
+          "nums": 136,
+          "ratio": 0.15
+      },
+      {
+          "keyword": "鸡翅",
+          "relation_topic": true,
+          "nums": 1,
+          "ratio": 0.6
+      },
+      {
+          "keyword": "辣翅",
+          "relation_topic": true,
+          "nums": 2,
+          "ratio": 0.2
+      }
+    ]
+  })
+})
+
+// 屏蔽关键词或者取消屏蔽关键词
+server.put('/api/txtanls/keywords/status/:id/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    "data": "5d6a209f76aa2c000bbce17e"
+  }, 2000)
+})
 // 重命名话题
 server.put('/api/txtanls/topics/update/:id/', function(req, res, next) {
   respond(req, res, next, {
@@ -112,6 +278,7 @@ server.get('/api/txtanls/topicgroups/', function(req, res, next) {
     ]
   })
 })
+
 // 获取原话记录关联话题和没有关联的数量
 server.get('/api/txtanls/record/relation/info/', function(req, res, next) {
   respond(req, res, next, {
@@ -124,6 +291,9 @@ server.get('/api/txtanls/record/relation/info/', function(req, res, next) {
     }
   })
 })
+
+
+// 分析展示
 
 // 话题筛选器
 server.get('/api/txtanls/topic/mentions/', function(req, res, next) {
