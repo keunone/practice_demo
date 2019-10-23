@@ -181,6 +181,23 @@ server.put('/api/txtanls/keywords/status/:id/', function(req, res, next) {
     "data": "5d6a209f76aa2c000bbce17e"
   }, 2000)
 })
+
+// 新建话题
+server.post('/api/txtanls/topics/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    "data": "5d6a133576aa2c0009d7a85b"
+  }, 2000)
+})
+
+// 更新话题函数
+server.put('/api/txtanls/topics/keyword/:id/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    "data": "5d6a209f76aa2c000bbce17e"
+  }, 2000)
+})
+
 // 重命名话题
 server.put('/api/txtanls/topics/update/:id/', function(req, res, next) {
   respond(req, res, next, {
@@ -225,17 +242,20 @@ server.get('/api/txtanls/topicgroups/', function(req, res, next) {
             {
                 "name": "生煎", // 话题名
                 "num": 999,  // 话题关联的原话记录数量
-                "topic_id": "5d4be9d6352a7a7a949e2348"  // 话题id
+                "topic_id": "5d4be9d6352a7a7a949e2348",  // 话题id
+                "logic_expression": "小杨生煎 or 阿三生煎"
             },
             {
                 "name": "生煎2",
                 "num": 1,
-                "topic_id": "5d4be9f5352a7a878c00d5f7"
+                "topic_id": "5d4be9f5352a7a878c00d5f7",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             },
             {
                 "name": "生煎3",
                 "num": 0,
-                "topic_id": "5d4bea14352a7a5b242797ad"
+                "topic_id": "5d4bea14352a7a5b242797ad",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             }
         ]
       },
@@ -246,32 +266,38 @@ server.get('/api/txtanls/topicgroups/', function(req, res, next) {
             {
                 "name": "食材",
                 "num": 40,
-                "topic_id": "5d4bfbd2352a7a4460fcc145"
+                "topic_id": "5d4bfbd2352a7a4460fcc145",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             },
             {
                 "name": "食材1",
                 "num": 40,
-                "topic_id": "5d4bfbd9352a7a721469078a"
+                "topic_id": "5d4bfbd9352a7a721469078a",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             },
             {
                 "name": "食材2",
                 "num": 30,
-                "topic_id": "5d4bfbe2352a7a1284ecd3c6"
+                "topic_id": "5d4bfbe2352a7a1284ecd3c6",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             },
             {
                 "name": "环境",
                 "num": 30,
-                "topic_id": "5d4bfc09352a7a3f7005925c"
+                "topic_id": "5d4bfc09352a7a3f7005925c",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             },
             {
                 "name": "环境1",
                 "num": 10,
-                "topic_id": "5d4bfc2b352a7a70fc0e381a"
+                "topic_id": "5d4bfc2b352a7a70fc0e381a",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             },
             {
                 "name": "环境2",
                 "num": 0,
-                "topic_id": "5d4bfc34352a7a71681b967a"
+                "topic_id": "5d4bfc34352a7a71681b967a",
+                "logic_expression": "小杨生煎 and (not 阿三生煎)"
             }
         ]
     }
