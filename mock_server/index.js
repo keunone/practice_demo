@@ -189,6 +189,13 @@ server.post('/api/txtanls/topics/', function(req, res, next) {
     "data": "5d6a133576aa2c0009d7a85b"
   }, 2000)
 })
+// 新建话题组
+server.post('/api/txtanls/topicgroups/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    "data": "5d6a133576aa2c0009d7a85b"
+  }, 2000)
+})
 
 // 更新话题函数
 server.put('/api/txtanls/topics/keyword/:id/', function(req, res, next) {
@@ -729,57 +736,32 @@ server.get('/api/txtanls/projects/', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
     status_code: 200,
-    data: [{
-      id: "1",
-      projectname: '我的项目名称',
-      username: 'abadfasfdasf',
-      datasource: [{
-        qtitle: 'sdlfasldfadsf',
-        datasrctype: 0,
-        question: 'sdfaslfdjasdlfasdflasdfsdfaslfdjasdlfasdflasdfsdfaslfdjasdlfasdflasdf',
-        starttime: new Date(),
-        endtime: new Date(),
-        filename: 'akkdslfjasldfjalsdfjld',
-      }, {
-        qtitle: 'sdlfasldfadsf',
-        datasrctype: 0,
-        question: 'sdfaslfdjasdlfasdflasdf',
-        starttime: new Date(),
-        endtime: new Date(),
-        filename: 'akkdslfjasldfjalsdfjld',
-      }, {
-        qtitle: 'sdlfasldfadsf',
-        datasrctype: 1,
-        question: 'sdfaslfdjasdlfasdflasdf',
-        starttime: new Date(),
-        endtime: new Date(),
-        filename: 'akkdslfjasldfjalsdfjld',
-      }]
-    }, {
-      id: "2",
-      projectname: '我的项目名称',
-      username: 'abadfasfdasf',
-      datasource: [{
-        qtitle: 'sdlfasldfadsf',
-        datasrctype: 0,
-        question: 'sdfaslfdjasdlfasdflasdf',
-        starttime: new Date(),
-        endtime: new Date(),
-        filename: 'akkdslfjasldfjalsdfjld',
-      }]
-    }, {
-      id: "3",
-      projectname: '我的项目名称',
-      username: 'abadfasfdasf',
-      datasource: [{
-        qtitle: 'sdlfasldfadsf',
-        datasrctype: 0,
-        question: 'sdfaslfdjasdlfasdflasdf',
-        starttime: new Date(),
-        endtime: new Date(),
-        filename: 'akkdslfjasldfjalsdfjld',
-      }]
-    }]
+    data: [
+      {
+        "projectname": "测试项目1", //项目名称
+        "username": "XXX4", //创建人名称
+        "createtime": "str" ,//创建时间
+        "datasource_name": "str", //数据源名称
+        "field":'list', //分析字段名称,
+        project_id: 1
+      },
+      {
+        "projectname": "测试项目2",
+        "username": "XXX2",
+        "createtime": "2019-09-01",
+        "datasource_name": "测试表1",
+        "field":["分析字段1","分析字段2"],
+        project_id: 2
+      },
+      {
+        "projectname": "测试项目3",
+        "username": "XXX1",
+        "createtime": "2019-09-01",
+        "datasource_name": "测试表1",
+        "field":["分析字段1","分析字段2"],
+        project_id: 3
+      }
+    ]
   })
 })
 
@@ -790,6 +772,50 @@ server.del('/api/txtanls/projects/:id/', function(req, res, next) {
   }, 1500)
 })
 
+// 数据源
+server.get('/api/txtanls/selectable/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    data: [
+      {
+        "table_id": 1, //数据表id
+        "table_name":"表一" // 数据表名字
+      },
+      {
+        "table_id": 2, //数据表id
+        "table_name": "表二" // 数据表名字
+      },
+      {
+        "table_id": 3, //数据表id
+        "table_name":"表三" // 数据表名字
+      },
+      {
+        "table_id": 4, //数据表id
+        "table_name":"表四" // 数据表名字
+      }
+    ]
+  })
+})
+// 分析文本字段
+server.get('/api/txtanls/selectfield/', function(req, res, next) {
+  respond(req, res, next, {
+    code: 0,
+    data: [
+      {
+        "table_name":"表一",//数据表名称
+        "field_name":"文本一",//字段名称
+        "field_time":"更新时间", //字段时间
+        column_id: 1
+      },
+      {
+        "table_name":"表一",//数据表名称
+        "field_name":"文本二",//字段名称
+        "field_time":"创建时间",//字段时间
+        column_id: 2
+      }
+    ]
+  })
+})
 server.get('/api/txtanls/survey/', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
