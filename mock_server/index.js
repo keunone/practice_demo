@@ -328,102 +328,427 @@ server.get('/api/txtanls/record/relation/info/', function(req, res, next) {
 
 // 分析展示
 
-// 话题筛选器
-server.get('/api/txtanls/topic/mentions/', function(req, res, next) {
+// 获取图表数据通用接口
+server.get('/api/txtanls/charts/', function(req, res, next) {
+  const { type } = req.query
+  let data = null;
+  switch(type) {
+    // 总体项目情感细分图
+    case "project_emotion": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+    // 总体项目情感趋势图
+    case "project_emotion_trend": 
+      data = [
+        {
+            "totalnum": 27,
+            "posnum": 15,
+            "neunum": 11,
+            "mixnum": 1,
+            "negnum": 0,
+            "time": "2019-03-06"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 12,
+            "mixnum": 0,
+            "negnum": 0,
+            "time": "2019-02-23"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 12,
+            "mixnum": 0,
+            "negnum": 0,
+            "time": "2019-02-15"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 15,
+            "mixnum": 32,
+            "negnum": 0,
+            "time": "2019-02-12"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 12,
+            "mixnum": 12,
+            "negnum": 21,
+            "time": "2019-02-11"
+        },
+        {
+            "totalnum": 24,
+            "posnum": 12,
+            "neunum": 25,
+            "mixnum": 32,
+            "negnum": 0,
+            "time": "2019-02-10"
+        },
+        {
+            "totalnum": 34,
+            "posnum": 52,
+            "neunum": 12,
+            "mixnum": 5,
+            "negnum": 4,
+            "time": "2019-02-09"
+        },
+        {
+            "totalnum": 23,
+            "posnum": 13,
+            "neunum": 14,
+            "mixnum": 4,
+            "negnum": 6,
+            "time": "2019-02-08"
+        },
+      ]
+      break;
+    // 话题情感看板图
+    case "topics_emotion": 
+      data = [
+        {
+          id: 1,
+          topicgrname: "话题组1",
+          name: "王小虎",
+          totalnum: 9,
+          total_ratio: 0.9,
+          posnum: 27,
+          negnum: 72,
+          neunum: 61,
+          mixnum: 57,
+          posratio: 13,
+          negratio: 40,
+          neuratio: 51,
+          mixratio: 34,
+          topic: [
+            {
+              id: 11,
+              topicname: "话题1",
+              name: "王小虎",
+              totalnum: 3,
+              total_ratio: 0.3,
+              posnum: 2,
+              negnum: 7,
+              neunum: 6,
+              mixnum: 3,
+              posratio: 3,
+              negratio: 10,
+              neuratio: 5,
+              mixratio: 4
+            },
+            {
+              id: 12,
+              topicname: "话题2",
+              name: "王小虎",
+              totalnum: 5,
+              total_ratio: 0.1,
+              posnum: 2,
+              negnum: 7,
+              neunum: 6,
+              mixnum: 3,
+              posratio: 3,
+              negratio: 10,
+              neuratio: 5,
+              mixratio: 4
+            }
+          ]
+        },
+        {
+          id: 2,
+          topicgrname: "话题组2",
+          name: "王小虎",
+          totalnum: 4,
+          total_ratio: 0.8,
+          posnum: 24,
+          negnum: 37,
+          neunum: 26,
+          mixnum: 42,
+          posratio: 30,
+          negratio: 20,
+          neuratio: 50,
+          mixratio: 40,
+          topic: [
+            {
+              id: 21,
+              topicname: "话题1",
+              name: "王小虎",
+              totalnum: 33,
+              total_ratio: 0.8,
+              posnum: 2,
+              negnum: 7,
+              neunum: 6,
+              mixnum: 3,
+              posratio: 3,
+              negratio: 10,
+              neuratio: 5,
+              mixratio: 4
+            },
+            {
+              id: 22,
+              topicname: "话题2",
+              name: "王小虎",
+              totalnum: 45,
+              total_ratio: 0.2,
+              posnum: 2,
+              negnum: 7,
+              neunum: 6,
+              mixnum: 3,
+              posratio: 3,
+              negratio: 10,
+              neuratio: 5,
+              mixratio: 4
+            }
+          ]
+        },
+        {
+          id: 3,
+          topicgrname: "话题组3",
+          name: "王小虎",
+          totalnum: 3,
+          total_ratio: 0.9,
+          posnum: 2,
+          negnum: 7,
+          neunum: 6,
+          mixnum: 3,
+          posratio: 3,
+          negratio: 10,
+          neuratio: 5,
+          mixratio: 4,
+          topic: [
+            {
+              id: 31,
+              topicname: "话题1",
+              name: "王小虎",
+              totalnum: 100,
+              total_ratio: 0.6,
+              posnum: 2,
+              negnum: 7,
+              neunum: 6,
+              mixnum: 3,
+              posratio: 3,
+              negratio: 10,
+              neuratio: 5,
+              mixratio: 4
+            },
+            {
+              id: 32,
+              topicname: "话题2",
+              name: "王小虎",
+              totalnum: 103,
+              total_ratio: 0.1,
+              posnum: 2,
+              negnum: 7,
+              neunum: 6,
+              mixnum: 3,
+              posratio: 3,
+              negratio: 10,
+              neuratio: 5,
+              mixratio: 4
+            }
+          ]
+        }
+      ]
+      break;
+    // 话题提及率变化图
+    case "topics_reference_rate": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+    // 话题提及率变化趋势图
+    case "topics_reference_trend": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+    // 话题好评率变化图
+    case "topics_praise_rate": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+    // 话题好评率变化趋势图
+    case "topics_praise_trend": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+    // 词云图
+    case "wordclouds": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+    // 话题关联分析图
+    case "topics_relations": 
+      data = {
+        "currentperiod": {
+          "totalnum": 9,
+          "posnum": 2, 
+          "neunum": 7,
+          "mixnum": 0,
+          "negnum": 0
+        },
+        "ringGrowth": {
+          "totalgrow": -2,
+          "posgrow": -6, 
+          "neugrow": 5,
+          "mixgrow": -1,
+          "neggrow": 0
+        },
+        "ringRatio": {
+          "totalratio": -0.18,
+          "posratio": -0.75,
+          "neuratio": 2.5,
+          "mixratio": "1",
+          "negratio": "-"
+        },
+        "nowpreiod_time": "2019-11-05",
+        "uppreiod_time": "2019-11-05"
+      }
+      break;
+  }
   respond(req, res, next, {
     code: 0,
     status_code: 200,
-    hastopicgroup: true,
-    data: [
-      {
-        "total_num": 11,
-        "topicgrname": "生煎组",
-        "topicgrid": "5d4be7d8352a7a553cb71545",
-        "topiclist": [
-          {
-              "topicname": "生煎",
-              "mentionnum": 9,
-              "topicid": "49e2348"
-          },
-          {
-              "topicname": "生煎2",
-              "mentionnum": 2,
-              "topicid": "5d4be9f5352d5f7"
-          },
-          {
-              "topicname": "生煎3",
-              "mentionnum": 2,
-              "topicid": "5d47a5b242797ad"
-          }
-        ]
-      },
-      {
-        "total_num": 13,
-        "topicgrname": "饺子组",
-        "topicgrid": "5d4be7553cb71546",
-        "topiclist": [
-          {
-              "topicname": "饺子1",
-              "mentionnum": 9,
-              "topicid": " a7a7a949e2348"
-          },
-          {
-              "topicname": "饺子2",
-              "mentionnum": 2,
-              "topicid": " 78c00d5f7"
-          },
-          {
-              "topicname": "饺子3",
-              "mentionnum": 2,
-              "topicid": " 242797ad"
-          }
-        ]
-      },
-      {
-        "total_num": 13,
-        "topicgrname": "包子组",
-        "topicgrid": "5d4be7547",
-        "topiclist": [
-          {
-              "topicname": "包子1",
-              "mentionnum": 9,
-              "topicid": "5d4be9d6352a "
-          },
-          {
-              "topicname": "包子2",
-              "mentionnum": 2,
-              "topicid": "5d4be9f535 "
-          },
-          {
-              "topicname": "包子3",
-              "mentionnum": 2,
-              "topicid": "5d4bea14352a7a5b"
-          }
-        ]
-      },
-     {
-      "total_num": 13,
-      "topicgrname": "煎饼组",
-      "topicgrid": "5d4be548",
-      "topiclist": [
-        {
-            "topicname": "煎饼1",
-            "mentionnum": 9,
-            "topicid": "5d4be9d6 "
-        },
-        {
-            "topicname": "煎饼2",
-            "mentionnum": 2,
-            "topicid": "5d4b"
-        },
-        {
-            "topicname": "煎饼3",
-            "mentionnum": 2,
-            "topicid": "5d4be"
-        }
-      ]
-    }
-  ]
+    data
   })
 })
 
@@ -624,242 +949,257 @@ server.get('/api/txtanls/topicgrs/ratio/', function(req, res, next) {
   })
 })
 
-// 总体情感趋势接口
-server.get('/api/txtanls/records/emotiontrend/', function(req, res, next) {
-  respond(req, res, next, {
-    code: 0,
-    status_code: 200,
-    data: {
-      "list": [
-        {
-            "totalnum": 27,
-            "posnum": 15,
-            "neunum": 11,
-            "mixnum": 1,
-            "negnum": 0,
-            "time": "2019-03-06"
-        },
-        {
-            "totalnum": 24,
-            "posnum": 12,
-            "neunum": 12,
-            "mixnum": 0,
-            "negnum": 0,
-            "time": "2019-02-23"
-        },
-        {
-            "totalnum": 24,
-            "posnum": 12,
-            "neunum": 12,
-            "mixnum": 0,
-            "negnum": 0,
-            "time": "2019-02-15"
-        },
-        {
-            "totalnum": 24,
-            "posnum": 12,
-            "neunum": 15,
-            "mixnum": 32,
-            "negnum": 0,
-            "time": "2019-02-12"
-        },
-        {
-            "totalnum": 24,
-            "posnum": 12,
-            "neunum": 12,
-            "mixnum": 12,
-            "negnum": 21,
-            "time": "2019-02-11"
-        },
-        {
-            "totalnum": 24,
-            "posnum": 12,
-            "neunum": 25,
-            "mixnum": 32,
-            "negnum": 0,
-            "time": "2019-02-10"
-        },
-        {
-            "totalnum": 34,
-            "posnum": 52,
-            "neunum": 12,
-            "mixnum": 5,
-            "negnum": 4,
-            "time": "2019-02-09"
-        },
-        {
-            "totalnum": 23,
-            "posnum": 13,
-            "neunum": 14,
-            "mixnum": 4,
-            "negnum": 6,
-            "time": "2019-02-08"
-        },
-      ]  
-    }
-  })
-})
-
-// 总体情感细分接口
-server.get('/api/txtanls/records/emotions/', function(req, res, next) {
-  respond(req, res, next, {
-    code: 0,
-    status_code: 200,
-    data: {
-      "currentperiod": {
-        "totalnum": 9,
-        "posnum": 2, 
-        "neunum": 7,
-        "mixnum": 0,
-        "negnum": 0
-      },
-      "ringGrowth": {
-        "totalgrow": -2,
-        "posgrow": -6, 
-        "neugrow": 5,
-        "mixgrow": -1,
-        "neggrow": 0
-      },
-      "ringRatio": {
-        "totalratio": -0.18,
-        "posratio": -0.75,
-        "neuratio": 2.5,
-        "mixratio": "1",
-        "negratio": "-"
-      }
-    }
-  })
-})
 
 // 文本分析-分析项目
 server.get('/api/txtanls/projects/', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
     status_code: 200,
-    data: [
-      {
-        "projectname": "测试项目1", //项目名称
-        "username": "XXX4", //创建人名称
-        "createtime": "str" ,//创建时间
-        "datasource_name": "str", //数据源名称
-        "field":'list', //分析字段名称,
-        project_id: 1
-      },
-      {
-        "projectname": "测试项目2",
-        "username": "XXX2",
-        "createtime": "2019-09-01",
-        "datasource_name": "测试表1",
-        "field":["分析字段1","分析字段2"],
-        project_id: 2
-      },
-      {
-        "projectname": "测试项目3",
-        "username": "XXX1",
-        "createtime": "2019-09-01",
-        "datasource_name": "测试表1",
-        "field":["分析字段1","分析字段2"],
-        project_id: 3
-      }
-    ]
+    data: {
+      "total_count": 2, //数据总数
+      "rows": [
+        {
+          "id": "5dc10ede76aa2c00096fbeb2", // 项目id
+          "name": "项目名称", //项目名称
+          "creator": "5cf20fb9e31a3c0c8195c2f2",
+          "status": 0,
+          "org_id": "5cf20fb9e31a3c0c8195c2d7",
+          "record_flag": 0,
+          "table_id": "5d14a30eaace700009e76d80", // 表id
+          "table_name": "上传文件", // 表名
+          "textfieldList": [
+            {
+              "id":"5d14a30eaace700009e76d81", // 字段id
+              "value": "some value" // 字段名
+            }
+          ], // 文本字段信息
+          "timefield_id": "", // 时间字段id，空表示没有
+          "timefield_name": "", // 时间字段名称，空表示没有
+          "createdID": null,
+          "createdDT": "2019-11-05 13:55:42",
+          "updatedID": null,
+          "updatedDT": "2019-11-05 13:55:42"
+        },
+        {
+          "id": "5dc111e476aa2c0009e8f38c",
+          "name": "项目名称1",
+          "creator": "5cf20fb9e31a3c0c8195c2f2",
+          "status": 0,
+          "org_id": "5cf20fb9e31a3c0c8195c2d7",
+          "record_flag": 0,
+          "table_id": "5d14a30eaace700009e76d80",
+          "table_name": "上传文件",
+          "textfieldList": [
+            {
+              "id": "5d14a30eaace700009e76d81",
+              "value": "some value"
+            }
+          ],
+          "timefield_id": "",
+          "timefield_name": "",
+          "createdID": null,
+          "createdDT": "2019-11-05 14:08:36",
+          "updatedID": null,
+          "updatedDT": "2019-11-05 14:08:36"
+        }
+      ],
+    "page": 1 // 页码 
+    }
   })
 })
 
-server.del('/api/txtanls/projects/:id/', function(req, res, next) {
+// 分析项目详情
+server.get('/api/txtanls/anlsprojects/:id', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
-    status_code: 200
+    status_code: 200,
+    data: {
+      "id": "5dc111e476aa2c0009e8f38c",
+      "name": "项目名称1",
+      "creator": "5cf20fb9e31a3c0c8195c2f2",
+      "status": 0,
+      "org_id": "5cf20fb9e31a3c0c8195c2d7",
+      "record_flag": 0,
+      "table_id": "5d14a30eaace700009e76d80",
+      "table_name": "上传文件",
+      "textfieldList": [
+          {
+            "id": "5d14a30eaace700009e76d81",
+            "value": "some value"
+           },
+          {
+            "id": "5d14a30eaace7009e76d81",
+            "value": "some value1"
+           }
+      ],
+      "timefield_id": "",
+      "timefield_name": "",
+      "createdID": null,
+      "createdDT": "2019-11-05 14:08:36",
+      "updatedID": null,
+      "updatedDT": "2019-11-05 14:08:36"
+    }
+  })
+})
+// 新建项目
+server.post('/api/txtanls/projects/', function(req, res, next) {
+  const { body } = req
+  if (body.name === "重复") {
+    respond(req, res, next, {
+      code: 5,
+      "msg": "项目名称已存在"
+    }, 2000)
+    return;
+  }
+  respond(req, res, next, {
+    code: 0,
+    data: {
+      "id": "5dc10ede76aa2c00096fbeb2",
+      "name": "新增项目名称",
+      "creator": "5cf20fb9e31a3c0c8195c2f2",
+      "status": 1,
+      "org_id": "5cf20fb9e31a3c0c8195c2d7",
+      "record_flag": 1,
+      "table_id": "5d14a30eaace700009e76d80",
+      "table_name": "上传文件",
+      "textfieldList": [
+          {
+              "id":"5d14a30eaace700009e76d81",
+              "value": "some value"
+          }
+      ],
+      "timefield_id": "5dbfbb398e1f3bd200c28ac2",
+      "timefield_name": "时间字段1",
+      "createdID": null,
+      "createdDT": "2019-11-05 13:55:42",
+      "updatedID": null,
+      "updatedDT": "2019-11-05 16:56:51"
+    }
+  }, 2000)
+})
+// 更新项目
+server.put('/api/txtanls/projects/:id', function(req, res, next) {
+  const { body } = req
+  if (body.name === "重复") {
+    respond(req, res, next, {
+      code: 5,
+      "msg": "项目名称已存在"
+    }, 2000)
+    return;
+  }
+  respond(req, res, next, {
+    code: 0,
+    data: {
+      "id": "5dc10ede76aa2c00096fbeb2",
+      "name": "更新项目名称2",
+      "creator": "5cf20fb9e31a3c0c8195c2f2",
+      "status": 1,
+      "org_id": "5cf20fb9e31a3c0c8195c2d7",
+      "record_flag": 1,
+      "table_id": "5d14a30eaace700009e76d80",
+      "table_name": "上传文件",
+      "textfieldList": [
+          {
+              "id":"5d14a30eaace700009e76d81",
+              "value": "some value"
+          }
+      ],
+      "timefield_id": "5dbfbb398e1f3bd200c28ac2",
+      "timefield_name": "时间字段1",
+      "createdID": null,
+      "createdDT": "2019-11-05 13:55:42",
+      "updatedID": null,
+      "updatedDT": "2019-11-05 16:56:51"
+    }
+  }, 2000)
+})
+// 删除项目
+server.del('/api/txtanls/projects/:id', function(req, res, next) {
+  respond(req, res, next, {
+    "code": 0,
+    "data": 1 // 删除个数
   }, 1500)
 })
 
 // 数据源
-server.get('/api/txtanls/selectable/', function(req, res, next) {
+server.get('/api/txtanls/worktables/', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
     data: [
       {
-        "table_id": 1, //数据表id
-        "table_name":"表一" // 数据表名字
-      },
+          "worktable_id": "5d14a30eaace700009e76d80", // 表id
+          "worktable_name": "表名1", // 表名
+          "text_fields": [
+              {
+                  "column_id": "5d14a30eaace700009e76d81", // 字段id
+                  "column_name": "value", // 字段名
+                  "column_type": 4 // 字段类型,参考数值
+              }
+          ], // 文本字段
+          "time_fields": [
+              {
+                  "column_id": "5dbfbb398e1f3bd200c28ac2",
+                  "column_name": "时间字段1",
+                  "column_type": 5
+              }
+          ]
+      }, // 时间字段
       {
-        "table_id": 2, //数据表id
-        "table_name": "表二" // 数据表名字
-      },
-      {
-        "table_id": 3, //数据表id
-        "table_name":"表三" // 数据表名字
-      },
-      {
-        "table_id": 4, //数据表id
-        "table_name":"表四" // 数据表名字
+          "worktable_id": "5d19a310aace70000a497729",
+          "worktable_name": "表名2",
+          "text_fields": [
+              {
+                  "column_id": "5dbfbc0d8e1f3bd200c28aca",
+                  "column_name": "text",
+                  "column_type": 4
+              }
+          ],
+          "time_fields": [
+              {
+                  "column_id": "5dbfbbc88e1f3bd200c28ac7",
+                  "column_name": "datetime",
+                  "column_type": 5
+              }
+          ]
       }
     ]
   })
 })
 // 分析文本字段
-server.get('/api/txtanls/selectfield/', function(req, res, next) {
+server.get('/api/txtanls/worktables/:id', function(req, res, next) {
   respond(req, res, next, {
     code: 0,
     data: [
       {
-        "table_name":"表一",//数据表名称
-        "field_name":"文本一",//字段名称
-        "field_time":"更新时间", //字段时间
-        column_id: 1
-      },
-      {
-        "table_name":"表一",//数据表名称
-        "field_name":"文本二",//字段名称
-        "field_time":"创建时间",//字段时间
-        column_id: 2
+        "worktable_id": "5d14a30eaace700009e76d80",
+        "worktable_name": "上传文件",
+        "text_fields": [
+            {
+                "column_id": "5d14a30eaace700009e76d81",
+                "column_name": "value",
+                "column_type": 4
+            },
+            {
+                "column_id": "5d14a30eaace700009e76d82",
+                "column_name": "列名",
+                "column_type": 4
+            }
+        ],
+        "time_fields": [
+            {
+                "column_id": "5dbfbb398e1f3bd200c28a1",
+                "column_name": "时间字段1",
+                "column_type": 5
+            },
+            {
+                "column_id": "5dbfbb398e1f3bd200c28a2",
+                "column_name": "时间字段2",
+                "column_type": 5
+            }
+        ]
       }
     ]
   })
-})
-server.get('/api/txtanls/survey/', function(req, res, next) {
-  respond(req, res, next, {
-    code: 0,
-    status_code: 200,
-    data: [{
-      title: 'adfasdf',
-      questions: ['dadfsaf',  'a', 'sadfasfads'],
-      starttime: new Date(),
-      endtime: new Date(),
-      id: 0
-    }, {
-      title: 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      questions: ['dadfsaf',  'a', 'sadfasfads'],
-      starttime: new Date(),
-      endtime: new Date(),
-      id: 1
-    }]
-  })
-})
-
-server.get('/api/txtanls/upload/', function(req, res, next) {
-  respond(req, res, next, {
-    code: 0,
-    status_code: 200,
-    data: [{
-      filename: 'asdfasdfasdf',
-      fileId: 0
-    }, {
-      filename: 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      fileId: 1
-    }]
-  })
-})
-
-server.put('/api/txtanls/upload/:id/', function(req, res, next) {
-  respond(req, res, next, {
-    code: 0
-  }, 2000)
-})
-
-server.del('/api/txtanls/upload/:id/', function(req, res, next) {
-  respond(req, res, next, {
-    code: 0
-  }, 2000)
 })
 
 server.listen(7999, function() {
